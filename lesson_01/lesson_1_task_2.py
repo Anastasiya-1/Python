@@ -1,3 +1,7 @@
-my_age = 30
-my_age = my_age + 3
-print(my_age)
+"""
+Программа выводит возраст пользователя через 3 года.
+"""
+
+MY_AGE = 30
+MY_AGE = MY_AGE + 3
+print(MY_AGE)

@@ -1,9 +1,14 @@
+"""
+Площадь квадрата
+"""
 import math
-
-def square(side):
-    area = side * side
+def square(length):
+    """
+    Вычисляет площадь квадрата.
+    """
+    area = length * length
     return math.ceil(area)
 
-side_length = 5
-result = square(side_length)
+SIDE_LENGTH = 5
+result = square(SIDE_LENGTH)
 print("Площадь квадрата:", result)
