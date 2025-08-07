@@ -1,9 +1,5 @@
-import pytest
 from yougile_api import YougileAPI
 
-@pytest.fixture(scope="session")
-def api():
+def test_simple():
     # Заменить на реальные значения перед запуском тестов!
-    base_url = "https://api.yougile.com"
-    token = "ВАШ_ТОКЕН"
-    return YougileAPI(base_url, token)
+    api = YougileAPI("https://api.yougile.com", "token")

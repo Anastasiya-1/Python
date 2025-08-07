@@ -1,21 +1,23 @@
 import requests
 
+BASE_URL = "https://api.yougile.com"
+
 class YougileAPI:
-    def __init__(self, base_url, token):
-        self.base_url = base_url
+    def __init__(self, token):
+        self.base_url = BASE_URL
         self.headers = {"Authorization": f"Bearer {token}"}
 
-    def create_project(self, name):  # [POST] /api-v2/projects
+    def create_project(self, title):  # [POST] /api-v2/projects
         return requests.post(
             f"{self.base_url}/api-v2/projects",
-            json={"name": name},
+            json={"title": title},
             headers=self.headers
         )
 
-    def update_project(self, project_id, name):  # [PUT] /api-v2/projects/{id}
+    def update_project(self, project_id, title):  # [PUT] /api-v2/projects/{id}
         return requests.put(
             f"{self.base_url}/api-v2/projects/{project_id}",
-            json={"name": name},
+            json={"title": title},
             headers=self.headers
         )
 
