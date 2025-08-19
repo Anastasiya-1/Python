@@ -7,7 +7,6 @@ from selenium.webdriver.support import expected_conditions as EC
 class CalculatorPage:
     """
     Page Object для калькулятора slow-calculator.
-
     Атрибуты:
         driver: WebDriver – экземпляр драйвера браузера
         wait: WebDriverWait – явное ожидание
@@ -16,17 +15,15 @@ class CalculatorPage:
     def __init__(self, driver: WebDriver) -> None:
         """
         Инициализация страницы калькулятора.
-
         :param driver: WebDriver – вебдрайвер Selenium
         :return: None
         """
         self.driver = driver
-        self.wait = WebDriverWait(driver, 45)
+        self.wait = WebDriverWait(driver, 60) # <= Запас времени!
 
     def open(self) -> None:
         """
         Открывает страницу калькулятора.
-
         :return: None
         """
         self.driver.get("https://bonigarcia.dev/selenium-webdriver-java/slow-calculator.html")
@@ -34,7 +31,6 @@ class CalculatorPage:
     def set_delay(self, delay: int) -> None:
         """
         Устанавливает задержку в поле #delay.
-
         :param delay: int — значение задержки в секундах
         :return: None
         """
@@ -45,20 +41,19 @@ class CalculatorPage:
     def click_button(self, value: str) -> None:
         """
         Нажимает кнопку на калькуляторе с текстом.
-
         :param value: str — кнопка (цифра или операция)
         :return: None
         """
         btn = self.wait.until(EC.element_to_be_clickable((By.XPATH, f"//span[text()='{value}']")))
         btn.click()
 
-    def wait_for_result(self, result: str) -> None:
+    def wait_for_result(self, expected: str, timeout: int = 60) -> None:
         """
-        Ожидает появления результата на экране.
-
-        :param result: str — ожидаемое значение результата (например, "15")
-        :return: None
+        Ожидает появления ожидаемого результата на экране калькулятора.
+        :param expected: ожидаемое значение (например, "15")
+        :param timeout: максимальное время ожидания, секунд
+        :return: строка с результатом
         """
-        self.wait.until(
-            EC.text_to_be_present_in_element((By.CSS_SELECTOR, "div.screen"), result)
-        )
+        wait = WebDriverWait(self.driver, timeout)
+        wait.until(lambda d: d.find_element(By.CSS_SELECTOR, "div.screen").text.strip() == expected)
+        return self.driver.find_element(By.CSS_SELECTOR, "div.screen").text.strip()

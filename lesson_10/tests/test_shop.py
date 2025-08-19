@@ -1,13 +1,17 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 import allure
 from selenium import webdriver
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 
-from lesson7.page_login import LoginPage
-from lesson7.page_products import ProductsPage
-from lesson7.page_cart import CartPage
-from lesson7.page_checkout import CheckoutPage
+from pages.login_page import LoginPage
+from pages.products_page import ProductsPage
+from pages.cart_page import CartPage
+from pages.checkout_page import CheckoutPage
 
 @pytest.fixture
 def browser():

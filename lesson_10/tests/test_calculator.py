@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 import allure
 from selenium import webdriver
@@ -22,10 +26,9 @@ def test_calculator_sum():
             page.click_button("8")
         with allure.step("Выполнить вычисление (нажать =)"):
             page.click_button("=")
-        with allure.step("Дождаться и проверить результат '15'"):
-            page.wait_for_result("15")
-            actual = driver.find_element_by_css_selector("div.screen").text.strip()
+        with allure.step("Дождаться и проверить результат '15' через PageObject"):
+            result = page.wait_for_result("15", timeout=60)
             with allure.step("Проверяем, что результат равен 15"):
-                assert actual == "15", f"Ожидалось 15, получено '{actual}'"
+                assert actual == "15", f"Ожидалось 15, получено '{result}'"
     finally:
         driver.quit()
