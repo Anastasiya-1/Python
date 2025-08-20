@@ -1,5 +1,4 @@
-import sys
-import os
+import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
@@ -8,10 +7,10 @@ from selenium import webdriver
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 
-from pages.login_page import LoginPage
-from pages.products_page import ProductsPage
-from pages.cart_page import CartPage
-from pages.checkout_page import CheckoutPage
+from pages.page_login import LoginPage
+from pages.page_products import ProductsPage
+from pages.page_cart import CartPage
+from pages.page_checkout import CheckoutPage
 
 @pytest.fixture
 def browser():
